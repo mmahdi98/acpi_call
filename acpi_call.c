@@ -6,7 +6,7 @@
 #include <linux/proc_fs.h>
 #include <linux/slab.h>
 #include <asm/uaccess.h>
-#include <acpi/acpi.h>
+#include <linux/acpi.h>
 
 MODULE_LICENSE("GPL");
 
@@ -352,7 +352,7 @@ static int __init init_acpi_call(void)
     struct proc_dir_entry *acpi_entry = proc_create("call",
                                                     0660,
                                                     acpi_root_dir,
-                                                    &proc_acpi_operations);
+                                                    (struct proc_ops *) &proc_acpi_operations);
 #else
     struct proc_dir_entry *acpi_entry = create_proc_entry("call", 0660, acpi_root_dir);
 #endif
